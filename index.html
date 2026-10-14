@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Patty Palace - Smash Burgers & Retro Vibes. The best burgers in town.">
+    <title>Patty Palace | Smash Burgers & Retro Vibes</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23ffde00'/%3E%3Ctext x='50' y='68' font-family='Arial, sans-serif' font-size='60' font-weight='bold' fill='%23ff2a2a' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* ==========================================================================
+           1. CSS RESET & VARIABLES (Neo-Brutalist / Retro-Pop Theme)
+           ========================================================================== */
+        :root {
+            --bg-cream: #fdf5e6;
+            --bg-yellow: #ffde00;
+            --accent-red: #ff2a2a;
+            --accent-blue: #1c6dd0;
+            --accent-green: #00c853;
+            --text-black: #111111;
+            --text-white: #ffffff;
+            --font-display: 'Archivo Black', sans-serif;
+            --font-body: 'Outfit', sans-serif;
+            --border-thick: 4px solid var(--text-black);
+            --shadow-hard: 8px 8px 0px var(--text-black);
+            --shadow-hard-sm: 5px 5px 0px var(--text-black);
+            --shadow-hard-hover: 12px 12px 0px var(--text-black);
+            --transition: all 0.2s ease-in-out;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--bg-cream);
+            color: var(--text-black);
+            overflow-x: hidden;
+            min-height: 100vh;
+            cursor: none; /* Custom cursor */
+            /* Retro grid background */
+            background-image: 
+                linear-gradient(rgba(17, 17, 17, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        /* ==========================================================================
+           2. ANIMATED MARQUEE TICKER
+           ========================================================================== */
+        .marquee-ticker {
+            background-color: var(--text-black);
+            color: var(--bg-yellow);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 100;
+            border-bottom: var(--border-thick);
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .marquee-content span {
+            margin: 0 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .marquee-content i {
+            color: var(--accent-red);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ==========================================================================
+           3. CUSTOM CURSOR (Burger Patty)
+           ========================================================================== */
+        .cursor-burger {
+            width: 32px;
+            height: 32px;
+            background-color: var(--text-black);
+            border-radius: 50%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid var(--bg-yellow);
+        }
+
+        .cursor-burger::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background-color: var(--accent-red);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .cursor-burger.hovering {
+            width: 60px;
+            height: 60px;
+            background-color: var(--accent-red);
+            border-color: var(--text-black);
+        }
+
+        .cursor-burger.hovering::after {
+            background-color: var(--bg-yellow);
+            transform: scale(1.5);
+        }
+
+        /* ==========================================================================
+           4. HEADER & NAVIGATION
+           ========================================================================== */
+        .site-header {
+            padding: 20px 0;
+            background-color: var(--bg-cream);
+            border-bottom: var(--border-thick);
+            position: relative;
+            z-index: 50;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-display);
+            font-size: 2rem;
+            color: var(--accent-red);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            -webkit-text-stroke: 1px var(--text-black);
+        }
+
+        .logo i {
+            color: var(--bg-yellow);
+            -webkit-text-stroke: 0;
+            font-size: 2.5rem;
+            filter: drop-shadow(3px 3px 0px var(--text-black));
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .main-nav a {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--text-black);
+            text-decoration: none;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 4px;
+            background-color: var(--accent-red);
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .cart-btn {
+            background-color: var(--bg-yellow);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard-sm);
+            padding: 10px 20px;
+            font-family: var(--font-display);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            cursor: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-btn:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: var(--shadow-hard);
+        }
+
+        .cart-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--text-black);
+        }
+
+        /* ==========================================================================
+           5. HERO SECTION
+           ========================================================================== */
+        .hero-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-display);
+            font-size: 5rem;
+            line-height: 1;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            color: var(--text-black);
+        }
+
+        .hero-content h1 span {
+            display: block;
+            color: var(--accent-red);
+            -webkit-text-stroke: 2px var(--text-black);
+            text-shadow: 4px 4px 0px var(--bg-yellow);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .btn-brutal {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 18px 35px;
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            font-family: var(--font-display);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-black);
+            background-color: var(--bg-yellow);
+            cursor: none;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .btn-brutal:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: var(--shadow-hard-hover);
+        }
+
+        .btn-brutal:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px var(--text-black);
+        }
+
+        .btn-brutal.red {
+            background-color: var(--accent-red);
+            color: var(--text-white);
+        }
+
+        .btn-brutal.green {
+            background-color: var(--accent-green);
+            color: var(--text-white);
+        }
+
+        /* Bouncing animation for CTA */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .bounce-anim {
+            animation: bounce 2s infinite ease-in-out;
+        }
+
+        /* Hero Image */
+        .hero-image-wrapper {
+            position: relative;
+        }
+
+        .hero-image-frame {
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            background-color: var(--text-white);
+            padding: 15px;
+            transform: rotate(3deg);
+            transition: var(--transition);
+        }
+
+        .hero-image-frame:hover {
+            transform: rotate(-2deg) scale(1.02);
+        }
+
+        .hero-image-frame img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 2px solid var(--text-black);
+        }
+
+        .hero-sticker {
+            position: absolute;
+            top: -30px;
+            right: -30px;
+            width: 120px;
+            height: 120px;
+            background-color: var(--accent-blue);
+            border: var(--border-thick);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-family: var(--font-display);
+            color: var(--text-white);
+            font-size: 1rem;
+            text-transform: uppercase;
+            transform: rotate(15deg);
+            box-shadow: var(--shadow-hard-sm);
+            animation: pulse 3s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: rotate(15deg) scale(1); }
+            50% { transform: rotate(15deg) scale(1.1); }
+        }
+
+        /* ==========================================================================
+           6. MENU SECTION (3D Flip Cards)
+           ========================================================================== */
+        .menu-section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: var(--font-display);
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            color: var(--text-black);
+            display: inline-block;
+            background-color: var(--bg-yellow);
+            padding: 10px 30px;
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            transform: rotate(-2deg);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .flip-card {
+            background-color: transparent;
+            width: 100%;
+            height: 380px;
+            perspective: 1000px;
+            cursor: none;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card:hover .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+            background-color: var(--text-white);
+        }
+
+        .flip-card-front {
+            background-color: var(--bg-cream);
+        }
+
+        .flip-card-front img {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: var(--border-thick);
+            margin-bottom: 20px;
+            box-shadow: 4px 4px 0px var(--text-black);
+        }
+
+        .flip-card-front h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .flip-card-front .price {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--accent-red);
+            background-color: var(--bg-yellow);
+            padding: 5px 15px;
+            border: 2px solid var(--text-black);
+            border-radius: 50px;
+        }
+
+        .flip-card-back {
+            background-color: var(--accent-blue);
+            color: var(--text-white);
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-back h3 {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            color: var(--bg-yellow);
+        }
+
+        .flip-card-back p {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .flip-card-back .btn-brutal {
+            padding: 12px 25px;
+            font-size: 0.9rem;
+            background-color: var(--bg-yellow);
+            color: var(--text-black);
+        }
+
+        /* ==========================================================================
+           7. QR CODE SECTION
+           ========================================================================== */
+        .qr-section {
+            padding: 80px 20px;
+            background-color: var(--text-black);
+            color: var(--text-white);
+            border-top: var(--border-thick);
+            border-bottom: var(--border-thick);
+        }
+
+        .qr-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .qr-text h2 {
+            font-family: var(--font-display);
+            font-size: 3rem;
+            text-transform: uppercase;
+            color: var(--bg-yellow);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .qr-text p {
+            font-size: 1.1rem;
+            color: #cccccc;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .qr-features {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .qr-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+        }
+
+        .qr-feature-item i {
+            color: var(--accent-green);
+            font-size: 1.3rem;
+            background-color: rgba(0, 200, 83, 0.1);
+            padding: 10px;
+            border-radius: 50%;
+            border: 1px solid var(--accent-green);
+        }
+
+        .qr-frame-wrapper {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .qr-frame {
+            background-color: var(--bg-yellow);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 25px;
+            transform: rotate(-3deg);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .qr-frame:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .qr-frame::before {
+            content: 'SCAN ME';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--accent-red);
+            color: var(--text-white);
+            font-family: var(--font-display);
+            font-size: 1rem;
+            padding: 5px 20px;
+            border: 3px solid var(--text-black);
+            border-radius: 50px;
+            white-space: nowrap;
+        }
+
+        .qr-code-container {
+            background-color: var(--text-white);
+            padding: 15px;
+            border: 3px solid var(--text-black);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .qr-code-container img {
+            width: 220px;
+            height: 220px;
+            display: block;
+        }
+
+        /* QR Laser Scan Animation */
+        .qr-laser {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent-red);
+            box-shadow: 0 0 15px var(--accent-red), 0 0 30px var(--accent-red);
+            animation: laserScan 2s infinite ease-in-out;
+        }
+
+        @keyframes laserScan {
+            0% { top: 0; opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { top: 100%; opacity: 0; }
+        }
+
+        /* ==========================================================================
+           8. DRAGGABLE SECRET MENU CARD
+           ========================================================================== */
+        .secret-card {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 280px;
+            background-color: var(--accent-red);
+            color: var(--text-white);
+            border: var(--border-thick);
+            box-shadow: var(--shadow-hard);
+            padding: 25px;
+            z-index: 500;
+            cursor: grab;
+            user-select: none;
+            transform: rotate(-5deg);
+            transition: box-shadow 0.2s;
+        }
+
+        .secret-card:active {
+            cursor: grabbing;
+        }
+
+        .secret-card.dragging {
+            box-shadow: 15px 15px 0px var(--text-black);
+            transform: rotate(0deg) scale(1.05);
+        }
+
+        .secret-card h4 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            color: var(--bg-yellow);
+        }
+
+        .secret-card p {
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .secret-card .badge {
+            display: inline-block;
+            background-color: var(--bg-yellow);
+            color: var(--text-black);
+            font-family: var(--font-display);
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border: 2px solid var(--text-black);
+            border-radius: 50px;
+            text-transform: uppercase;
+        }
+
+        .secret-card .close-secret {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            width: 30px;
+            height: 30px;
+            background-color: var(--text-black);
+            color: var(--text-white);
+            border: 2px solid var(--bg-yellow);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* ==========================================================================
+           9. FOOTER
+           ========================================================================== */
+        .site-footer {
+            background-color: var(--bg-yellow);
+            padding: 40px 20px;
+            border-top: var(--border-thick);
+            text-align: center;
+        }
+
+        .site-footer p {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: var(--text-black);
+        }
+
+        /* ==========================================================================
+           10. RESPONSIVE DESIGN
+           ========================================================================== */
+        @media (max-width: 900px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+
+            .hero-content p {
+                margin: 0 auto 30px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            .hero-sticker {
+                width: 90px;
+                height: 90px;
+                font-size: 0.8rem;
+                top: -15px;
+                right: -15px;
+            }
+
+            .qr-inner {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .qr-features {
+                align-items: center;
+            }
+
+            .main-nav {
+                display: none; /* Simplified for mobile */
+            }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .secret-card {
+                width: 220px;
+                bottom: 20px;
+                right: 20px;
+                padding: 15px;
+            }
+
+            .flip-card {
+                height: 340px;
+            }
+
+            .flip-card-front img {
+                width: 140px;
+                height: 140px;
+            }
+
+            .qr-code-container img {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Cursor (Burger Patty) -->
+    <div class="cursor-burger" id="cursor-burger"></div>
+
+    <!-- Animated Marquee Ticker -->
+    <div class="marquee-ticker">
+        <div class="marquee-content">
+            <span><i class="fa-solid fa-star"></i> FREE DELIVERY ON ORDERS OVER $30</span>
+            <span><i class="fa-solid fa-burger"></i> TRY OUR NEW SMASH BURGER</span>
+            <span><i class="fa-solid fa-beer-mug-empty"></i> HAPPY HOUR 4-6PM DAILY</span>
+            <span><i class="fa-solid fa-star"></i> FREE DELIVERY ON ORDERS OVER $30</span>
+            <span><i class="fa-solid fa-burger"></i> TRY OUR NEW SMASH BURGER</span>
+            <span><i class="fa-solid fa-beer-mug-empty"></i> HAPPY HOUR 4-6PM DAILY</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="logo">
+                <i class="fa-solid fa-burger"></i> Patty Palace
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#menu">Menu</a></li>
+                    <li><a href="#qr">Scan</a></li>
+                    <li><a href="#">Locations</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            <button class="cart-btn">
+                <i class="fa-solid fa-cart-shopping"></i> Cart (0)
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1>Smash <span>Burgers</span> & Retro Vibes</h1>
+            <p>Hand-pressed patties, secret sauce, and buns toasted to perfection. Welcome to the Palace.</p>
+            <div class="hero-cta">
+                <a href="#menu" class="btn-brutal red bounce-anim">
+                    <i class="fa-solid fa-utensils"></i> Order Now
+                </a>
+                <a href="#qr" class="btn-brutal">
+                    <i class="fa-solid fa-qrcode"></i> View Menu
+                </a>
+            </div>
+        </div>
+        <div class="hero-image-wrapper">
+            <div class="hero-image-frame">
+                <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=800&auto=format&fit=crop" alt="Delicious Smash Burger">
+            </div>
+            <div class="hero-sticker">
+                <span>Best<br>Burgers<br>In Town</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section with 3D Flip Cards -->
+    <section class="menu-section" id="menu">
+        <div class="section-header">
+            <h2>Our Classics</h2>
+        </div>
+        <div class="menu-grid">
+            
+            <!-- Flip Card 1 -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=400&auto=format&fit=crop" alt="Classic Smash">
+                        <h3>The Classic Smash</h3>
+                        <div class="price">$12</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Ingredients</h3>
+                        <p>Double smashed beef patty, American cheese, pickles, onions, and our signature Palace Sauce on a toasted brioche bun.</p>
+                        <button class="btn-brutal">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Card 2 -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop" alt="Bacon BBQ">
+                        <h3>Bacon BBQ Stack</h3>
+                        <div class="price">$15</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Ingredients</h3>
+                        <p>Triple smoked bacon, crispy onion rings, sharp cheddar, and smoky BBQ sauce. A towering masterpiece.</p>
+                        <button class="btn-brutal">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flip Card 3 -->
+            <div class="flip-card">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=400&auto=format&fit=crop" alt="Veggie Burger">
+                        <h3>The Green Machine</h3>
+                        <div class="price">$11</div>
+                    </div>
+                    <div class="flip-card-back">
+                        <h3>Ingredients</h3>
+                        <p>Plant-based patty, avocado, lettuce, tomato, and vegan garlic aioli on a whole wheat bun. Guilt-free goodness.</p>
+                        <button class="btn-brutal">Add to Order</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- QR Code Section -->
+    <section class="qr-section" id="qr">
+        <div class="qr-inner">
+            <div class="qr-text">
+                <h2>Scan. Order. Enjoy.</h2>
+                <p>Skip the line and order directly from your phone. Point your camera at the QR code to access our full digital menu, exclusive offers, and loyalty rewards.</p>
+                <div class="qr-features">
+                    <div class="qr-feature-item">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Full menu with nutritional info</span>
+                    </div>
+                    <div class="qr-feature-item">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Exclusive app-only discounts</span>
+                    </div>
+                    <div class="qr-feature-item">
+                        <i class="fa-solid fa-check"></i>
+                        <span>Earn points on every order</span>
+                    </div>
+                </div>
+            </div>
+            <div class="qr-frame-wrapper">
+                <div class="qr-frame">
+                    <div class="qr-code-container">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://pattypalace.example.com/menu&color=111111&bgcolor=ffffff" alt="QR Code to Digital Menu">
+                        <div class="qr-laser"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 Patty Palace. All rights reserved. Made with 🔥 and 🧀.</p>
+    </footer>
+
+    <!-- Draggable Secret Menu Card -->
+    <div class="secret-card" id="secret-card">
+        <div class="close-secret" id="close-secret"><i class="fa-solid fa-xmark"></i></div>
+        <span class="badge">Secret Menu</span>
+        <h4>The Quad Stack</h4>
+        <p>4 patties, 4 cheeses, bacon jam, and a fried egg. Ask for the "Palace Special" at the counter.</p>
+    </div>
+
+    <!-- ==========================================================================
+         JAVASCRIPT LOGIC
+         ========================================================================== -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // ==================================================================
+            // 1. CUSTOM CURSOR LOGIC
+            // ==================================================================
+            const cursorBurger = document.getElementById('cursor-burger');
+            const interactiveElements = document.querySelectorAll('a, button, .flip-card, .qr-frame, .secret-card');
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+
+            window.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Smooth follow for cursor
+            function animateCursor() {
+                const distX = mouseX - cursorX;
+                const distY = mouseY - cursorY;
+                
+                cursorX += distX * 0.2;
+                cursorY += distY * 0.2;
+                
+                cursorBurger.style.left = `${cursorX}px`;
+                cursorBurger.style.top = `${cursorY}px`;
+                
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Hover effects on interactive elements
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => cursorBurger.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => cursorBurger.classList.remove('hovering'));
+            });
+
+            // ==================================================================
+            // 2. DRAGGABLE SECRET MENU CARD (Physics-based)
+            // ==================================================================
+            const secretCard = document.getElementById('secret-card');
+            const closeSecretBtn = document.getElementById('close-secret');
+            
+            let isDragging = false;
+            let dragStartX = 0, dragStartY = 0;
+            let cardStartX = 0, cardStartY = 0;
+            let velocityX = 0, velocityY = 0;
+            let lastMouseX = 0, lastMouseY = 0;
+            let animationFrameId = null;
+
+            // Initialize position based on bottom/right CSS
+            const rect = secretCard.getBoundingClientRect();
+            let currentX = rect.left;
+            let currentY = rect.top;
+
+            // Set explicit position to allow dragging
+            secretCard.style.bottom = 'auto';
+            secretCard.style.right = 'auto';
+            secretCard.style.left = `${currentX}px`;
+            secretCard.style.top = `${currentY}px`;
+
+            secretCard.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                secretCard.classList.add('dragging');
+                
+                dragStartX = e.clientX;
+                dragStartY = e.clientY;
+                cardStartX = currentX;
+                cardStartY = currentY;
+                
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+                velocityX = 0;
+                velocityY = 0;
+
+                if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+
+                const deltaX = e.clientX - dragStartX;
+                const deltaY = e.clientY - dragStartY;
+
+                currentX = cardStartX + deltaX;
+                currentY = cardStartY + deltaY;
+
+                // Track velocity for momentum
+                velocityX = e.clientX - lastMouseX;
+                velocityY = e.clientY - lastMouseY;
+                lastMouseX = e.clientX;
+                lastMouseY = e.clientY;
+
+                secretCard.style.left = `${currentX}px`;
+                secretCard.style.top = `${currentY}px`;
+            });
+
+            window.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                secretCard.classList.remove('dragging');
+
+                // Apply momentum
+                applyMomentum();
+            });
+
+            function applyMomentum() {
+                // Apply friction
+                velocityX *= 0.92;
+                velocityY *= 0.92;
+
+                // Stop if velocity is very low
+                if (Math.abs(velocityX) < 0.1 && Math.abs(velocityY) < 0.1) {
+                    return;
+                }
+
+                currentX += velocityX;
+                currentY += velocityY;
+
+                // Bounce off edges
+                const maxX = window.innerWidth - secretCard.offsetWidth;
+                const maxY = window.innerHeight - secretCard.offsetHeight;
+
+                if (currentX < 0) { currentX = 0; velocityX *= -0.5; }
+                if (currentX > maxX) { currentX = maxX; velocityX *= -0.5; }
+                if (currentY < 0) { currentY = 0; velocityY *= -0.5; }
+                if (currentY > maxY) { currentY = maxY; velocityY *= -0.5; }
+
+                secretCard.style.left = `${currentX}px`;
+                secretCard.style.top = `${currentY}px`;
+
+                animationFrameId = requestAnimationFrame(applyMomentum);
+            }
+
+            // Close secret card
+            if (closeSecretBtn) {
+                closeSecretBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    secretCard.style.transition = 'opacity 0.3s, transform 0.3s';
+                    secretCard.style.opacity = '0';
+                    secretCard.style.transform = 'scale(0.8)';
+                    setTimeout(() => secretCard.remove(), 300);
+                });
+            }
+
+            // ==================================================================
+            // 3. CONFETTI BURST ON SECRET CARD CLICK
+            // ==================================================================
+            secretCard.addEventListener('dblclick', () => {
+                createConfettiBurst(secretCard);
+            });
+
+            function createConfettiBurst(element) {
+                const rect = element.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                
+                const emojis = ['🍔', '🍟', '🥤', '🧀', '🥓', '🍅', '🥬', '⭐'];
+                
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    particle.style.position = 'fixed';
+                    particle.style.left = `${centerX}px`;
+                    particle.style.top = `${centerY}px`;
+                    particle.style.fontSize = `${Math.random() * 20 + 15}px`;
+                    particle.style.pointerEvents = 'none';
+                    particle.style.zIndex = '9999';
+                    particle.style.transition = 'all 1s cubic-bezier(0.25, 1, 0.5, 1)';
+                    document.body.appendChild(particle);
+
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 200 + 100;
+                    const destX = centerX + Math.cos(angle) * distance;
+                    const destY = centerY + Math.sin(angle) * distance;
+
+                    requestAnimationFrame(() => {
+                        particle.style.left = `${destX}px`;
+                        particle.style.top = `${destY}px`;
+                        particle.style.opacity = '0';
+                        particle.style.transform = `rotate(${Math.random() * 360}deg) scale(0.5)`;
+                    });
+
+                    setTimeout(() => particle.remove(), 1000);
+                }
+            }
+
+            // ==================================================================
+            // 4. FLIP CARD HOVER SOUND (Optional/Commented)
+            // ==================================================================
+            // Uncomment the following to add a subtle click sound on flip
+            /*
+            const flipCards = document.querySelectorAll('.flip-card');
+            const flipSound = new Audio('data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA='); // Silent base64 placeholder
+            
+            flipCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    // flipSound.play().catch(e => console.log('Audio play failed'));
+                });
+            });
+            */
+
+            // ==================================================================
+            // 5. CONSOLE BRANDING
+            // ==================================================================
+            console.log('%c 🍔 PATTY PALACE 🍔 ', 'background: #ffde00; color: #111; font-size: 20px; font-weight: bold; padding: 10px 20px; border: 3px solid #111;');
+            console.log('%c Smash Burgers & Retro Vibes ', 'color: #ff2a2a; font-size: 14px; font-weight: bold;');
+
+        });
+    </script>
+</body>
+</html>
